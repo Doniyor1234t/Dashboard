@@ -117,8 +117,11 @@ import {maska} from 'maska'
       this.toggle = false
       },
     },
-  }
-  </script>
+    mounted() {
+    this.$store.dispatch('count',5)
+  },
+}
+</script>
   
   <style>
   

@@ -104,7 +104,10 @@ export default {
       this.direction = {}
       this.toggle = false
     },
-  }
+  },
+  mounted() {
+    this.$store.dispatch('count',2)
+  },
 }
 </script>
 

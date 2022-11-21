@@ -127,6 +127,9 @@ export default {
     this.toggle = false
     },
   },
+  mounted() {
+    this.$store.dispatch('count',4)
+  },
 }
 </script>
 

@@ -18,12 +18,12 @@
   </el-container>
 
   <el-table :data="payments"  style="width: 100%">
-    <el-table-column prop="group.title" label="Izoh"/>
-    <el-table-column prop="pupil.name" label="Izoh"/>
-    <el-table-column prop="historysumma[0].summa" label="Izoh"/>
-    <el-table-column prop="historysumma[0].data" label="Izoh"/>
+    <el-table-column prop="group.title" label="Gururh"/>
+    <el-table-column prop="pupil.name" label="O'quvchi"/>
+    <el-table-column prop="historysumma[0].summa" label="Summa tolovi"/>
+    <el-table-column prop="historysumma[0].data" label="Sana"/>
     <el-table-column prop="historysumma[0].comment" label="Izoh"/>
-    <el-table-column prop="historysumma[0].typepayment" label="Izoh"/>
+    <el-table-column prop="historysumma[0].typepayment" label="Tolov turi"/>
     <el-table-column align="right">
       <template #default="scope">
           <el-button type="warning" @click="edit(scope.row._id)">
@@ -138,7 +138,8 @@ import {maska} from 'maska'
       },
     },
     mounted() {
-    },
+    this.$store.dispatch('count',8)
+  },
   }
   </script>
   

@@ -10,7 +10,7 @@
         >
         <el-menu-item @click="$router.push('/')"  index="1">
           <el-icon :size="24"><Menu /></el-icon>
-          <template #title> Yo'nalish</template>
+          <template #title>Bosh sahifa</template>
         </el-menu-item>
         <el-menu-item @click="$router.push('/direction')"  index="2">
           <el-icon :size="24"><List /></el-icon>

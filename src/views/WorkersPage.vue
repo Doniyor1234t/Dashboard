@@ -64,6 +64,7 @@
       </el-form-item>
     </el-form>
   </el-dialog>
+
 </template>
 
 <script>
@@ -121,6 +122,9 @@ export default {
       this.toggle = false
       console.log(this.type);
     },
+  },
+  mounted() {
+    this.$store.dispatch('count',3)
   },
 }
 </script>
