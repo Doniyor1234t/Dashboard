@@ -6,33 +6,37 @@
       <el-scrollbar>
         <el-menu
           class="el-menu-vertical-demo"
-          default-active="1"
+          :default-active="`${active}`"
         >
-        <el-menu-item @click="$router.push('/direction')"  index="1">
+        <el-menu-item @click="$router.push('/')"  index="1">
+          <el-icon :size="24"><Menu /></el-icon>
+          <template #title> Yo'nalish</template>
+        </el-menu-item>
+        <el-menu-item @click="$router.push('/direction')"  index="2">
           <el-icon :size="24"><List /></el-icon>
           <template #title> Yo'nalish</template>
         </el-menu-item>
-          <el-menu-item @click="$router.push('/workers')"  index="2">
+          <el-menu-item @click="$router.push('/workers')"  index="3">
             <el-icon :size="24"><Avatar /></el-icon>
             <template #title> Xodimlar</template>
           </el-menu-item>
-          <el-menu-item @click="$router.push('/group')"  index="3">
+          <el-menu-item @click="$router.push('/group')"  index="4">
             <el-icon  :size="24"><House /></el-icon>
             <template #title>Kurslar va guruh</template>
           </el-menu-item>
-          <el-menu-item @click="$router.push('/pupil')"  index="4">
+          <el-menu-item @click="$router.push('/pupil')"  index="5">
             <el-icon  :size="24"><UserFilled /></el-icon>
             <template #title>O'quvchilar</template>
           </el-menu-item>
-          <el-menu-item @click="$router.push('/msg')"  index="5">
+          <el-menu-item @click="$router.push('/msg')"  index="6">
             <el-icon  :size="24"><Sell /></el-icon>
             <template #title>Kassa</template>
           </el-menu-item>
-          <el-menu-item @click="$router.push('/spending')" index="6">
+          <el-menu-item @click="$router.push('/spending')" index="7">
             <el-icon  :size="24"><SoldOut /></el-icon>
             <template #title>Chiqimlar</template>
           </el-menu-item>
-          <el-menu-item @click="$router.push('/pay')" index="7">
+          <el-menu-item @click="$router.push('/pay')" index="8">
             <el-icon  :size="24"><Document /></el-icon>
             <template #title>Hisobot</template>
           </el-menu-item>
@@ -45,7 +49,11 @@
 
 
 export default {
-  
+  computed:{
+    active(){
+      return this.$store.getters.count
+    }
+  }
 
 }
 </script>

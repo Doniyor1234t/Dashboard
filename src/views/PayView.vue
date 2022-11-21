@@ -18,18 +18,12 @@
   </el-container>
 
   <el-table :data="payments"  style="width: 100%">
-    <el-table-column prop="group" label="Izoh"/>
-    <el-table-column prop="pupil" label="Izoh"/>
-    <el-table-column prop="historysumma.summa" label="Izoh"/>
-    <el-table-column prop="historysumma.data" label="Izoh"/>
-    <el-table-column prop="historysumma.typepayment" label="Izoh"/>
-    <el-table-column prop="historysumma.typepayment" label="Izoh"/>
-    <el-table-column prop="historysumma.comment" label="Izoh"/>
-    <el-table-column label="Xarajat (mln so'm )" >
-      <template #default="scope">
-        {{scope.row.summa/1000000}}
-      </template>
-    </el-table-column>
+    <el-table-column prop="group.title" label="Izoh"/>
+    <el-table-column prop="pupil.name" label="Izoh"/>
+    <el-table-column prop="historysumma[0].summa" label="Izoh"/>
+    <el-table-column prop="historysumma[0].data" label="Izoh"/>
+    <el-table-column prop="historysumma[0].comment" label="Izoh"/>
+    <el-table-column prop="historysumma[0].typepayment" label="Izoh"/>
     <el-table-column align="right">
       <template #default="scope">
           <el-button type="warning" @click="edit(scope.row._id)">
@@ -41,7 +35,6 @@
       </template>
     </el-table-column>
   </el-table>
-{{historysumma}}
   <el-dialog v-model="toggle" width="600px">
     <el-form :model="payment" label-position="top" >
       <el-form-item label="Summa">
@@ -54,28 +47,28 @@
           <el-option v-for="item of pupil" :key="item._id" :value="item._id" :label="item.name"/>
         </el-select>
       </el-form-item>
-      <el-form :model="historysumma">
+
         <el-form-item label="Summa">
-          <input type="number" v-model="historysumma.summa"/>
+          <input type="number" v-model="payment.summa"/>
         </el-form-item>
         <el-form-item label="Data">
-          <el-input type="date" v-model="historysumma.data"/>
+          <el-input type="date" v-model="payment.data"/>
         </el-form-item>
         <el-form-item label="Comment">
-          <el-input v-model="historysumma.typepayment"/>
+          <el-input v-model="payment.typepayment"/>
         </el-form-item>
         <el-form-item label="Comment">
-          <el-input v-model="historysumma.comment"/>
+          <el-input v-model="payment.comment"/>
         </el-form-item>
-      </el-form>
+
       <el-form-item>
         <el-button v-show="toggleBtn" @click="add()">Add</el-button>
         <el-button v-show="!toggleBtn" @click="save()">Save</el-button>
       </el-form-item>
-      {{payment}}
-      {{historysumma}}
     </el-form>
+    {{payment}}
   </el-dialog>
+  {{payments}}
 
 </template>
   
@@ -85,7 +78,6 @@ import {maska} from 'maska'
     data() {
       return {
         payment:{
-          historysumma:[],
         },
         historysumma:{},
         toggle:false,
@@ -136,9 +128,7 @@ import {maska} from 'maska'
       remove(id){
         this.$store.dispatch('removePayment',id)
       },
-      add(){
-        this.payment.historysumma.push(this.historysumma)
-        this.$store.dispatch('addPayment',this.payment)
+      add(){        this.$store.dispatch('addPayment',this.payment)
         this.$message({
           message:'Done',
           type:'success'
@@ -146,6 +136,8 @@ import {maska} from 'maska'
         this.payment = {}
         this.toggle = false
       },
+    },
+    mounted() {
     },
   }
   </script>

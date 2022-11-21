@@ -42,7 +42,7 @@ const payments = {
       })
     },
     getnPayment(context,payload){
-      return context.dispatch('getAxios',`payment/edit/${payload}`)
+      return context.dispatch('getAxios',`payment/pay/${payload}`)
     },
     removePayment(context,payload){
       context.dispatch('deleteAxios',`payment/delete/${payload}`)
@@ -59,7 +59,6 @@ const payments = {
         data: payload
       })
       .then(res => {
-        res.data.allsumma = 0
         if(res.status === 200){
           context.commit('addPayment',res.data)
         }
