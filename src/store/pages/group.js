@@ -20,7 +20,7 @@ const groups = {
         })
       },
       saveGroup(state,payload){
-        state.groups = state.workers.map(group => {
+        state.groups = state.groups.map(group => {
             if (group._id === payload._id){
                 return payload
             }

@@ -99,6 +99,7 @@ export default {
         message:'Changed!',
         type:'success'
       })
+      this.$store.dispatch("allGroups")
       this.group = {}
       this.toggle = false
       this.toggleBtn = true
@@ -106,7 +107,7 @@ export default {
     edit(_id){
       this.$store.dispatch('getnGroup',_id)
       .then(res => {
-        console.log(res.status)
+        console.log(res.data)
         if (res.status === 200){
           this.group = res.data
           this.toggleBtn = false

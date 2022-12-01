@@ -10,7 +10,7 @@
             <el-icon size="24"><Search/></el-icon>
             <input placeholder="Search" clearable />
           </el-form>
-          <el-button class="header__button" @click="toggle = !toggle, pupil={}, toggleBtn = true">
+          <el-button class="header__button" @click="toggle = true, pupil={}, toggleBtn = true">
             <el-icon><Plus/></el-icon>
           </el-button>
         </el-row>
@@ -26,44 +26,50 @@
             <el-button type="warning" @click="edit(scope.row._id)">
               <el-icon><Edit/></el-icon>
             </el-button>
-            <el-button type="danger" @click="remove(scope.row._id)">
-              <el-icon><Delete /></el-icon>
-            </el-button>
+            <el-popconfirm title="Qaroringiz qatiyimi?" @confirm="remove(scope.row._id)" confirm-button-text="Ha" cancel-button-text="Yoq" confirm-button-type="danger" cancel-button-type="success" icon-color="red">
+              <template #reference>
+                <el-button type="danger">
+                  <el-icon><Delete /></el-icon>
+                </el-button>
+              </template>
+            </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
-{{pupil}}
-{{toggleBtn}}
     <el-dialog v-model="toggle" width="600px">
-      <el-form :model="pupil" label-position="top" >
+      <el-form :model="pupil" ref="pupil">
         <el-form-item label="Guruh nomi">
           <el-input v-model="pupil.name"/>
         </el-form-item>
-        <el-form-item v-show="pupil.name" label="Telefeon raqam">
-          <el-input v-model="pupil.phone" v-maska="'+ 998 (##) ###-##-##'" />
+        <el-form-item label="Telefeon raqam" prop="phone" :rules="[{ required: true, message: 'age is required' }]">
+          <el-input v-model="pupil.phone" v-maska="'+ 998 (##) ###-##-##'" autocomplete="off" />
         </el-form-item>
-        <el-form-item v-show="pupil.phone"  label="Ustoz">
+        <el-form-item label="Ustoz">
           <el-select v-model="pupil.group" placeholder="Roo'hatdan tanlang">
             <el-option v-for="item of group" :key="item._id" :value="item._id" :label="item.title"/>
           </el-select>
         </el-form-item>
-        <el-form-item v-show="pupil.group">
-          <el-button v-show="toggleBtn" @click="add()">Add</el-button>
+        <el-form-item>
+          <el-button @click="add('pupil')">Add</el-button>
           <el-button v-show="!toggleBtn" @click="save()">Save</el-button>
         </el-form-item>
       </el-form>
+      {{pupil}}
     </el-dialog>
   
   </template>
   
   <script>
 import {maska} from 'maska'
+
+
+
   export default {
     data() {
       return {
         pupil:{},
         toggle:false,
-        toggleBtn:true
+        toggleBtn:true,
       }
     },
     computed:{
@@ -107,20 +113,28 @@ import {maska} from 'maska'
       remove(id){
         this.$store.dispatch('removePupil',id)
       },
-      add(){
-      this.$store.dispatch('addPupil',this.pupil)
-      this.$message({
-        message:'Done',
-        type:'success'
-      })
-      this.pupil = {}
-      this.toggle = false
+      add(formRef){
+        if(this.toggle == true)
+          this.$refs[formRef].validate((valid) => {
+            if (valid) {
+              this.$store.dispatch('addPupil',this.pupil)
+              this.$message({
+                message:'Done',
+                type:'success'
+              })
+              this.pupil = {}
+              this.toggle = false
+            } else {
+              return false;
+            }
+          })
       },
     },
     mounted() {
     this.$store.dispatch('count',5)
   },
 }
+
 </script>
   
   <style>

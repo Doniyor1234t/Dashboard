@@ -35,7 +35,6 @@
         </template>
       </el-table-column>
     </el-table>
-{{spendings}}
     <el-dialog v-model="toggle" width="600px">
       <el-form :model="spending" label-position="top" >
         <el-form-item label="Summa">
@@ -112,7 +111,7 @@ import {maska} from 'maska'
       },
     },
     mounted() {
-    this.$store.dispatch('count',7)
+    this.$store.dispatch('count',6)
   },
   }
   </script>

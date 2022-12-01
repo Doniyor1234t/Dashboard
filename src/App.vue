@@ -36,6 +36,22 @@ body{
   font-family: 'Poppins';
   background: #FAFAFA;
 }
+.el-table td.el-table__cell, .el-table th.el-table__cell.is-leaf{
+  border-bottom: none;
+}
+.is-leaf{
+  color: #000;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+.td{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  opacity: 0.5;
+}
 .header {
   margin-bottom: 20px;
 

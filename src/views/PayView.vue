@@ -17,11 +17,15 @@
     </el-header>
   </el-container>
 
-  <el-table :data="payments"  style="width: 100%">
+  <el-table :data="payments" style="width: 100%">
     <el-table-column prop="group.title" label="Gururh"/>
     <el-table-column prop="pupil.name" label="O'quvchi"/>
     <el-table-column prop="historysumma[0].summa" label="Summa tolovi"/>
-    <el-table-column prop="historysumma[0].data" label="Sana"/>
+    <el-table-column prop="historysumma[0].data" label="Sana">
+      <template #default="scope">
+        {{getdata(scope.row.historysumma[0].data)}}
+      </template>
+    </el-table-column>
     <el-table-column prop="historysumma[0].comment" label="Izoh"/>
     <el-table-column prop="historysumma[0].typepayment" label="Tolov turi"/>
     <el-table-column align="right">
@@ -66,9 +70,7 @@
         <el-button v-show="!toggleBtn" @click="save()">Save</el-button>
       </el-form-item>
     </el-form>
-    {{payment}}
   </el-dialog>
-  {{payments}}
 
 </template>
   
@@ -97,6 +99,10 @@ import {maska} from 'maska'
     },
     directives: {maska},
     methods: {
+      getdata(data){
+      let d  = new Date(data)
+      return data = [d.getDate(),d.getMonth()+1,d.getFullYear()].join('-')
+      },
       getTitle(id){
         this.worker.filter(teacher => {
           if(teacher._id===id ){
@@ -128,7 +134,9 @@ import {maska} from 'maska'
       remove(id){
         this.$store.dispatch('removePayment',id)
       },
-      add(){        this.$store.dispatch('addPayment',this.payment)
+      add(){
+        
+        this.$store.dispatch('addPayment',this.payment)
         this.$message({
           message:'Done',
           type:'success'
@@ -138,11 +146,11 @@ import {maska} from 'maska'
       },
     },
     mounted() {
-    this.$store.dispatch('count',8)
+    this.$store.dispatch('count',7)
   },
   }
   </script>
   
   <style>
-  
+
   </style>

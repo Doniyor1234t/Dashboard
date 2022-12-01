@@ -35,9 +35,10 @@ const pupils = {
           data: payload
       })
       .then(res => {
-          if(res.status === 200){
-              context.commit('savePupil',payload)
-          }
+        res.data.group = context.getters.groups.find(group => group._id == payload.group)
+        if(res.status === 200){
+          context.commit('savePupil',payload)
+        }
       })
     },
     getnPupil(context,payload){
@@ -58,7 +59,7 @@ const pupils = {
         data: payload
       })
       .then(res => {
-        res.data.group = context.getters.groups.find(group => group._id == payload.group)
+        
         if(res.status === 200){
           context.commit('addPupil',res.data)
         }

@@ -28,15 +28,11 @@
             <el-icon  :size="24"><UserFilled /></el-icon>
             <template #title>O'quvchilar</template>
           </el-menu-item>
-          <el-menu-item @click="$router.push('/msg')"  index="6">
-            <el-icon  :size="24"><Sell /></el-icon>
-            <template #title>Kassa</template>
-          </el-menu-item>
-          <el-menu-item @click="$router.push('/spending')" index="7">
+          <el-menu-item @click="$router.push('/spending')" index="6">
             <el-icon  :size="24"><SoldOut /></el-icon>
             <template #title>Chiqimlar</template>
           </el-menu-item>
-          <el-menu-item @click="$router.push('/pay')" index="8">
+          <el-menu-item @click="$router.push('/pay')" index="7">
             <el-icon  :size="24"><Document /></el-icon>
             <template #title>Hisobot</template>
           </el-menu-item>

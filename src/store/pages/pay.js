@@ -30,6 +30,9 @@ const payments = {
     }
   }, 
   actions:{
+    // checkPay(context,payload){
+
+    // },
     savePayment(context,payload){
       context.dispatch('postAxios',{
           url:`payment/save/${payload._id}`,
@@ -42,7 +45,7 @@ const payments = {
       })
     },
     getnPayment(context,payload){
-      return context.dispatch('getAxios',`payment/pay/${payload}`)
+      return context.dispatch('getAxios',`payment/edit/${payload}`)
     },
     removePayment(context,payload){
       context.dispatch('deleteAxios',`payment/delete/${payload}`)
